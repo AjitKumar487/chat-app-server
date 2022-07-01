@@ -4,7 +4,8 @@ const http = require('http');
 const mysql = require("mysql");
 const bcrypt = require("bcrypt");
 const { Server } = require("socket.io");
-require("dotenv").config();
+
+require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
@@ -42,10 +43,10 @@ io.on("connection", (socket) => {
 })
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database: "users",
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASS,
+  database: process.env.DATABASE,
 });
 
 db.connect((err) => {
