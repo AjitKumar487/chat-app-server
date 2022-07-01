@@ -162,6 +162,6 @@ app.get("/api/get", (req, res) => {
   );
 });
 
-app.listen(process.env.PORT || 5000, process.env.YOUR_HOST, () => {
+server.listen(process.env.PORT || 5000, process.env.YOUR_HOST, () => {
   console.log("Sever running on port 5000");
 });
