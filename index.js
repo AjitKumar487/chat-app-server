@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const http = require('http');
 const mysql = require("mysql");
-const bcrypt = require("bcrypt");
+const bcryptjs = require("bcryptjs");
 const { Server } = require("socket.io");
 
 require('dotenv').config();
@@ -70,7 +70,7 @@ app.post("/api/register", (req, res) => {
       if (response.length > 0) {
         res.send({ exists: true, msg: "User already exists." });
       } else {
-        bcrypt.hash(password, 10, (error, hash) => {
+        bcryptjs.hash(password, 10, (error, hash) => {
           if (error) {
             console.log(error);
           }
@@ -102,7 +102,7 @@ app.post("/api/login", (req, res) => {
       if (error) return res.send(error);
 
       if (result.length > 0) {
-        bcrypt.compare(password, result[0].password, (error, response) => {
+        bcryptjs.compare(password, result[0].password, (error, response) => {
           if (error) return res.send({ error });
 
           if (response) {
